@@ -9,6 +9,8 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(favicon(__dirname + '/client/build/favicon.ico'));
 
+//app.use('/favicon.ico', express.static('client/build/favicon.ico'));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');

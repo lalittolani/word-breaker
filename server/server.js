@@ -3,7 +3,11 @@ const request = require('request');
 
 const app = express();
 
+// app.use(express.static(path.join(__dirname, 'build')));
 
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -14,7 +18,9 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.get('/', (req, res) => { res.send('Hello from Express!')
+app.get('/', (req, res) => {
+  res.send('Hello from Express!');
+});
 app.get('/fetch', (req, res) => {
   console.log(req.query.url);
   request({ url: req.query.url }, (error, response, body) => {

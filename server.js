@@ -1,13 +1,13 @@
 const express = require('express');
 const request = require('request');
 const path = require('path');
-
+const favicon = require('serve-favicon');
 const app = express();
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use(favicon(__dirname + '/build/favicon.ico'));
+app.use(favicon(__dirname + '/client/build/favicon.ico'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

@@ -103,7 +103,7 @@ const WordBreaker = () => {
     let val = e.target.value;
     //Take only a-z letter and white space
     // regex for this is  ->    /^[a-z ]*$/gm
-    const regexTest = new RegExp('^[a-z ]*$');
+    const regexTest = new RegExp('^[a-zA-Z ]*$');
 
     if (regexTest.test(val)) {
       setRegexText(val);
@@ -120,7 +120,8 @@ const WordBreaker = () => {
     // console.log('🚀 ~ file: index.js ~ line 77 ~ onChange ~ val', val);
     const regex = new RegExp('^' + val.toLowerCase() + '$');
     let _wordList = baseWordList.filter(
-      (item) => item.name.length === val.length && regex.test(item.name)
+      (item) =>
+        item.name.length === val.length && regex.test(item.name.toLowerCase())
     );
     setWordList(_wordList);
     //console.log(_wordList);

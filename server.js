@@ -1,13 +1,13 @@
 const express = require('express');
 const request = require('request');
+const path = require('path');
 
 const app = express();
 
 // app.use(express.static(path.join(__dirname, 'build')));
 
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/', (req, res) => {
-  res.send('Hello from Express!');
+  res.send('Hello from Word Breaker!');
 });
 app.get('/fetch', (req, res) => {
   console.log(req.query.url);
@@ -31,5 +31,11 @@ app.get('/fetch', (req, res) => {
   });
 });
 
-const PORT = 4000;
+/// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + 'client/build/index.html'));
+});
+
+const PORT = 5000;
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

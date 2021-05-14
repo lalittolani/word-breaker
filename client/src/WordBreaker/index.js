@@ -28,7 +28,7 @@ const WordBreaker = () => {
   }, [remSeen]);
 
   const fakeDataUrl =
-    'http://localhost:4000/fetch?url=https://theunscrambled.com/unscramble-';
+    'http://localhost:5000/fetch?url=https://theunscrambled.com/unscramble-';
 
   const fetchData = (word) => {
     console.log('fetchData', word);

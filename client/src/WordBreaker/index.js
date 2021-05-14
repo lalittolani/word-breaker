@@ -28,7 +28,7 @@ const WordBreaker = () => {
   }, [remSeen]);
 
   const fakeDataUrl =
-    'http://localhost:5000/fetch?url=https://theunscrambled.com/unscramble-';
+    'https://word-breaker-unscramble.herokuapp.com/fetch?url=https://theunscrambled.com/unscramble-';
 
   const fetchData = (word) => {
     console.log('fetchData', word);
@@ -132,7 +132,7 @@ const WordBreaker = () => {
         <Card
           title="Unscramble Game Breaker"
           bordered={true}
-          style={{ width: '70%', border: '0px solid red' }}
+          style={{ width: '95%', border: '0px solid red' }}
         >
           <Space size="large" direction="vertical">
             <Input.Search

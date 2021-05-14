@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { Input, Spin, List, Space, message, Card } from 'antd';
-import './index.css';
+import { Input, Spin, List, Space, message, Card, Layout } from 'antd';
 
+import './index.css';
+const { Header, Content, Footer } = Layout;
 const WordBreaker = () => {
   const [word, setWord] = React.useState([]);
   const [wordList, setWordList] = React.useState([]);
@@ -129,54 +130,69 @@ const WordBreaker = () => {
 
   return (
     <>
-      <div className="site-card-border-less-wrapper">
-        <Card
-          title="Unscramble Game Breaker"
-          bordered={true}
-          style={{ width: '95%', border: '0px solid red' }}
-        >
-          <Space size="large" direction="vertical">
-            <Input.Search
-              placeholder="Enter Word to Unscramble"
-              //allowClear
-              enterButton="Search"
-              size="large"
-              onSearch={onSearchWord}
-              maxLength="12"
-              onPressEnter={onPressEnter}
-              ref={inputRef}
-              loading={loading}
-              onChange={onChangeMainWord}
-            />
+      <Layout>
+        <Layout>
+          {/* <Header
+            className="site-layout-sub-header-background"
+            style={{ padding: 0 }}
+          /> */}
+          <Content>
+            <div className="site-card-border-less-wrapper">
+              <Card
+                title="Unscramble Game Breaker"
+                bordered={true}
+                style={{ width: '100%', border: '0px solid red' }}
+              >
+                <Space size="large" direction="vertical">
+                  <Input.Search
+                    placeholder="Enter Word to Unscramble"
+                    //allowClear
+                    enterButton="Search"
+                    size="large"
+                    onSearch={onSearchWord}
+                    maxLength="12"
+                    onPressEnter={onPressEnter}
+                    ref={inputRef}
+                    loading={loading}
+                    onChange={onChangeMainWord}
+                  />
 
-            {remSeen && word.length > 0 && (
-              <>
-                <Input
-                  placeholder="Enter word to Search"
-                  maxLength={word.length}
-                  onChange={onChangeRegex}
-                  value={regexText}
-                  id="regex"
-                  name="regex"
-                  disabled={loading}
-                  ref={inputRef2}
-                />
+                  {remSeen && word.length > 0 && (
+                    <>
+                      <Input
+                        placeholder="Enter word to Search"
+                        maxLength={word.length}
+                        onChange={onChangeRegex}
+                        value={regexText}
+                        id="regex"
+                        name="regex"
+                        disabled={loading}
+                        ref={inputRef2}
+                      />
 
-                <div className="demo-infinite-container">
-                  <Spin tip="Loading..." spinning={loading}>
-                    <List
-                      size="small"
-                      bordered
-                      dataSource={wordList}
-                      renderItem={(item) => <List.Item>{item.name}</List.Item>}
-                    />
-                  </Spin>
-                </div>
-              </>
-            )}
-          </Space>
-        </Card>
-      </div>
+                      <div className="demo-infinite-container">
+                        <Spin tip="Loading..." spinning={loading}>
+                          <List
+                            size="small"
+                            bordered
+                            dataSource={wordList}
+                            renderItem={(item) => (
+                              <List.Item>{item.name}</List.Item>
+                            )}
+                          />
+                        </Spin>
+                      </div>
+                    </>
+                  )}
+                </Space>
+              </Card>
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            ©2021 Created by Lalit Tolani
+          </Footer>
+        </Layout>
+      </Layout>
     </>
   );
 };

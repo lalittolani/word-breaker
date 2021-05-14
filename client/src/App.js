@@ -5,6 +5,7 @@ import WordBreaker from './WordBreaker';
 const App = () => (
   <div className="App">
     <WordBreaker />
+   
   </div>
 );
 export default App;

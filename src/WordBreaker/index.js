@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, Spin, List, Tooltip, Space, message, Card } from 'antd';
+import { Input, Spin, List, Space, message, Card } from 'antd';
 import './index.css';
 
 const WordBreaker = () => {
@@ -11,11 +11,21 @@ const WordBreaker = () => {
   const [regexText, setRegexText] = React.useState('');
   const inputRef = React.useRef(null);
   const inputRef2 = React.useRef(null);
+  const [remSeen, setRemSeen] = React.useState(false);
 
   React.useEffect(() => {
     inputRef.current.focus();
     return () => {};
   }, []);
+
+  React.useEffect(() => {
+    console.log(
+      '🚀 ~ file: index.js ~ line 22 ~ React.useEffect ~ useEffect',
+      remSeen
+    );
+
+    remSeen && inputRef2.current.focus();
+  }, [remSeen]);
 
   const fakeDataUrl =
     'http://localhost:4000/fetch?url=https://theunscrambled.com/unscramble-';
@@ -56,10 +66,12 @@ const WordBreaker = () => {
         setWordList(data.itemListElement);
         setBaseWordList(data.itemListElement);
         setLoading(false);
+        setRemSeen(true);
       })
       .catch(function (err) {
         message.error('Fetch Error :-S' + err);
         setLoading(false);
+        setRemSeen(true);
       });
   };
 
@@ -67,6 +79,7 @@ const WordBreaker = () => {
     setRegexText('');
     setWordList([]);
     setBaseWordList([]);
+    setRemSeen(false);
   };
 
   const onSearchWord = (word) => {
@@ -75,6 +88,7 @@ const WordBreaker = () => {
       return;
     }
     setRegexText('');
+
     setWord(word.toLowerCase());
     fetchData(word.toLowerCase());
     //inputRef2.current.focus();
@@ -118,7 +132,7 @@ const WordBreaker = () => {
         <Card
           title="Unscramble Game Breaker"
           bordered={true}
-          style={{ width: '80%', border: '0px solid red' }}
+          style={{ width: '70%', border: '0px solid red' }}
         >
           <Space size="large" direction="vertical">
             <Input.Search
@@ -134,7 +148,7 @@ const WordBreaker = () => {
               onChange={onChangeMainWord}
             />
 
-            {word.length > 0 && (
+            {remSeen && word.length > 0 && (
               <>
                 <Input
                   placeholder="Enter word to Search"

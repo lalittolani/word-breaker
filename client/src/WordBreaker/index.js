@@ -3,9 +3,9 @@ import React from 'react';
 import { Input, Spin, List, Space, message, Card, Layout } from 'antd';
 
 import './index.css';
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 const WordBreaker = () => {
-  const [word, setWord] = React.useState([]);
+  const [word, setWord] = React.useState('');
   const [wordList, setWordList] = React.useState([]);
   const [baseWordList, setBaseWordList] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -104,7 +104,7 @@ const WordBreaker = () => {
     let val = e.target.value;
     //Take only a-z letter and white space
     // regex for this is  ->    /^[a-z ]*$/gm
-    const regexTest = new RegExp('^[a-zA-Z ]*$');
+    const regexTest = new RegExp('^[a-zA-Z.]*$');
 
     if (regexTest.test(val)) {
       setRegexText(val);
@@ -117,7 +117,7 @@ const WordBreaker = () => {
       setWordList(baseWordList);
       return;
     }
-    val = val.split(' ').join('.');
+    //val = val.split(' ').join('.');
     // console.log('🚀 ~ file: index.js ~ line 77 ~ onChange ~ val', val);
     const regex = new RegExp('^' + val.toLowerCase() + '$');
     let _wordList = baseWordList.filter(
@@ -189,7 +189,7 @@ const WordBreaker = () => {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            ©2021 Created by Lalit Tolani
+            ©2021 Created by Lalit Tolani Version 1.0
           </Footer>
         </Layout>
       </Layout>
